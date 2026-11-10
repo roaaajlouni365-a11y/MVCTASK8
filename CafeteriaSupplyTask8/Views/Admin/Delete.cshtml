@@ -1,0 +1,6 @@
+@model UserRoleViewModel
+@{ ViewData["Title"] = "Delete user"; }
+<section class="card form-card"><h1>Delete @Model.FullName?</h1><p>@Model.Email · @Model.Role</p>
+<div class="notice error">This permanently deletes the account and its @ViewBag.RequestCount supply request(s), including all request items. Stock already issued for approved requests is not returned.</div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><input asp-for="ConcurrencyStamp" type="hidden" />
+<div class="actions"><button class="button danger" type="submit">Delete user and requests</button><a class="button secondary" asp-action="Index">Cancel</a></div></form></section>

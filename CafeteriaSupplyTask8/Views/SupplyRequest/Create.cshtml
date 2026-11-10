@@ -1,0 +1,5 @@
+@model RequestFormViewModel
+@{ ViewData["Title"] = "New supply request"; }
+<div class="page-heading"><div><h1>New supply request</h1></div><span class="badge Pending">Pending on submission</span></div>
+<section class="card"><form asp-action="Create" method="post"><partial name="_Form" model="Model" /></form></section>
+@section Scripts { <script src="~/js/request.js" asp-append-version="true"></script> }

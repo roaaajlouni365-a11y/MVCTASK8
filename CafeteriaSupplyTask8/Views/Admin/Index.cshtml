@@ -1,0 +1,11 @@
+@model List<UserRoleViewModel>
+@{ ViewData["Title"] = "User management"; var ownId = User.FindFirstValue(ClaimTypes.NameIdentifier); }
+<div class="page-heading"><div><h1>User management</h1></div><span class="badge">@Model.Count accounts</span></div>
+<div class="card table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead><tbody>
+@foreach (var user in Model)
+{
+<tr><td><strong>@user.FullName</strong></td><td>@user.Email</td><td><span class="badge">@user.Role</span></td><td class="links">
+@if (user.Id != ownId) { <a asp-action="Edit" asp-route-id="@user.Id">Change role</a><a class="danger-text" asp-action="Delete" asp-route-id="@user.Id">Delete</a> } else { <span>Your account</span> }
+</td></tr>
+}
+</tbody></table></div>

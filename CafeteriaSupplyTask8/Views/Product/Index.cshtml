@@ -1,0 +1,18 @@
+@model List<Product>
+@{ ViewData["Title"] = "Products"; var manager = User.IsInRole(AppRoles.Admin) || User.IsInRole(AppRoles.SuperAdmin); }
+<div class="page-heading"><div><h1>Products</h1></div>
+@if (manager) { <a class="button" asp-action="Create">Add product</a> }
+</div>
+@if (Model.Count == 0) { <div class="card empty">No products yet.</div> }
+else
+{
+<div class="card table-wrap"><table><thead><tr><th>Product</th><th>Unit price</th><th>Available</th><th>Actions</th></tr></thead><tbody>
+@foreach (var p in Model)
+{
+<tr><td><strong>@p.Name</strong><small>@p.Description</small></td><td>@p.Price.ToString("N2")</td><td><span class="badge @(p.Quantity == 0 ? "Rejected" : "Approved")">@p.Quantity</span></td><td class="links">
+<a asp-action="Details" asp-route-id="@p.Id">Details</a>
+@if (manager) { <a asp-action="Edit" asp-route-id="@p.Id">Edit</a><a class="danger-text" asp-action="Delete" asp-route-id="@p.Id">Delete</a> }
+</td></tr>
+}
+</tbody></table></div>
+}

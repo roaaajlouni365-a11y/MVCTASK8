@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-CafeteriaSupplyTask8-43087c40-50cc-4a31-9e20-a686745c4921</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14"><PrivateAssets>all</PrivateAssets></PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.14"><PrivateAssets>all</PrivateAssets></PackageReference>
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="11.0.0" />
+  </ItemGroup>
+</Project>

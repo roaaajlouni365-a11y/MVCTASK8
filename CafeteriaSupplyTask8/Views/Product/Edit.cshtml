@@ -1,0 +1,3 @@
+@model ProductViewModel
+@{ ViewData["Title"] = "Edit product"; }
+<section class="card form-card"><h1>Edit product</h1><p>Quantity is current available stock. Existing request prices remain unchanged.</p><form asp-action="Edit" asp-route-id="@Model.Id" method="post"><partial name="_Form" model="Model" /></form></sectio

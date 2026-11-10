@@ -1,0 +1,19 @@
+@{ ViewData["Title"] = "Home"; }
+<h1>University Cafeteria Supply Requests</h1>
+<div class="actions">
+@if (User.Identity?.IsAuthenticated == true)
+{
+    <a class="button" asp-controller="Product" asp-action="Index">Products</a>
+    <a class="button" asp-controller="SupplyRequest" asp-action="Index">Supply requests</a>
+    <a class="button" asp-controller="SupplyRequest" asp-action="Create">Create request</a>
+    @if (User.IsInRole(AppRoles.SuperAdmin))
+    {
+        <a class="button" asp-controller="Admin" asp-action="Index">Manage users</a>
+    }
+}
+else
+{
+    <a class="button" asp-controller="Account" asp-action="Login">Login</a>
+    <a class="button" asp-controller="Account" asp-action="Register">Register</a>
+}
+</div>

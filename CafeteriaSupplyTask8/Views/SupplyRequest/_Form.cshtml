@@ -1,0 +1,19 @@
+@model RequestFormViewModel
+<div asp-validation-summary="All" class="validation" role="alert"></div>
+<input asp-for="Id" type="hidden" /><input asp-for="RowVersion" type="hidden" />
+<p>Enter a quantity for each product you need. Leave the others at 0. Stock is checked again at approval.</p>
+@if (Model.Items.Count == 0) { <div class="notice">There are no products. Ask an administrator to add products first.</div> }
+else
+{
+<div class="table-wrap"><table><thead><tr><th>Product</th><th>Unit price</th><th>Available</th><th>Requested quantity</th><th>Subtotal</th></tr></thead><tbody>
+@for (var i = 0; i < Model.Items.Count; i++)
+{
+<tr data-line data-price="@Model.Items[i].UnitPrice.ToString(System.Globalization.CultureInfo.InvariantCulture)">
+<td><strong>@Model.Items[i].Name</strong><input asp-for="Items[i].ProductId" type="hidden" /></td><td>@Model.Items[i].UnitPrice.ToString("N2")</td><td>@Model.Items[i].Available</td>
+<td><label class="sr-only" asp-for="Items[i].Quantity">Quantity of @Model.Items[i].Name</label><input class="qty" asp-for="Items[i].Quantity" type="number" min="0" max="@Model.Items[i].Available" step="1" required data-quantity /></td><td data-subtotal>0.00</td></tr>
+}
+</tbody></table></div>
+<div class="total"><span>Estimated total</span><strong id="request-total" aria-live="polite">0.00</strong></div>
+<small>The server calculates the final total using current prices. Editing a Pending request refreshes all its item prices.</small>
+<div class="actions"><button class="button" type="submit">Save request</button><a class="button secondary" asp-action="Index">Cancel</a></div>
+}

@@ -1,0 +1,5 @@
+@model Product
+@{ ViewData["Title"] = Model.Name; }
+<section class="card form-card"><h1>@Model.Name</h1><p>@Model.Description</p>
+<dl><dt>Unit price</dt><dd>@Model.Price.ToString("N2")</dd><dt>Available quantity</dt><dd>@Model.Quantity</dd></dl>
+<div class="actions"><a class="button" asp-controller="SupplyRequest" asp-action="Create">Create request</a><a class="button secondary" asp-action="Index">Back to products</a></div></section>

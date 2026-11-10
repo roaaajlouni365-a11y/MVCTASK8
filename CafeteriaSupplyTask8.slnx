@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CafeteriaSupplyTask8.Checks/CafeteriaSupplyTask8.Checks.csproj" />
+  <Project Path="CafeteriaSupplyTask8/CafeteriaSupplyTask8.csproj" />
+</Solution>

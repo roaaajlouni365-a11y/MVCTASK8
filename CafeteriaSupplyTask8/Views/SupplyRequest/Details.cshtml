@@ -1,0 +1,18 @@
+@model SupplyRequest
+@{ ViewData["Title"] = "Request #" + Model.Id; var manager = User.IsInRole(AppRoles.Admin) || User.IsInRole(AppRoles.SuperAdmin); var owner = User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId; }
+<div class="page-heading"><div><h1>Request #@Model.Id</h1><p>@Model.User.FullName · @Model.RequestDate.ToString("yyyy-MM-dd HH:mm") UTC</p></div><span class="badge @Model.Status">@Model.Status</span></div>
+<section class="card"><div class="table-wrap"><table><thead><tr><th>Product</th><th>Quantity</th><th>Saved unit price</th><th>Subtotal</th></tr></thead><tbody>
+@foreach (var item in Model.Items.OrderBy(i => i.Product.Name))
+{ <tr><td>@item.Product.Name</td><td>@item.Quantity</td><td>@item.Price.ToString("N2")</td><td>@((item.Price * item.Quantity).ToString("N2"))</td></tr> }
+</tbody></table></div><div class="total"><span>Total request price</span><strong>@Model.TotalPrice.ToString("N2")</strong></div>
+<div class="actions">
+@if (Model.Status == RequestStatus.Pending)
+{
+    @if (owner) { <a class="button secondary" asp-action="Edit" asp-route-id="@Model.Id">Edit request</a><a class="button secondary danger-text" asp-action="Delete" asp-route-id="@Model.Id">Delete request</a> }
+    @if (manager)
+    {
+        <form asp-action="Approve" asp-route-id="@Model.Id" method="post"><input type="hidden" name="rowVersion" value="@Convert.ToBase64String(Model.RowVersion)" /><button class="button" type="submit">Approve &amp; issue stock</button></form>
+        <form asp-action="Reject" asp-route-id="@Model.Id" method="post"><input type="hidden" name="rowVersion" value="@Convert.ToBase64String(Model.RowVersion)" /><button class="button danger" type="submit">Reject</button></form>
+    }
+}
+<a class="button secondary" asp-action="Index">Back to requests</a></div></section>

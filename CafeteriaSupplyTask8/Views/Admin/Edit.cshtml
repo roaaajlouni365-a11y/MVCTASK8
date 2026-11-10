@@ -1,0 +1,8 @@
+@model UserRoleViewModel
+@{ ViewData["Title"] = "Change role"; }
+<section class="card form-card"><h1>Change role</h1><p>@Model.FullName · @Model.Email</p>
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+<div asp-validation-summary="All" class="validation" role="alert"></div><input asp-for="Id" type="hidden" /><input asp-for="ConcurrencyStamp" type="hidden" />
+<label asp-for="Role"></label><select asp-for="Role">@foreach (var role in AppRoles.All) { <option value="@role">@role</option> }</select>
+<p>The user will need to sign in again after their role changes.</p>
+<div class="actions"><button class="button" type="submit">Save role</button><a class="button secondary" asp-action="Index">Cancel</a></div></form></section>

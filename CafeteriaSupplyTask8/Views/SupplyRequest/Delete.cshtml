@@ -1,0 +1,5 @@
+@model SupplyRequest
+@{ ViewData["Title"] = "Delete request"; }
+<section class="card form-card"><h1>Delete request #@Model.Id?</h1><p>This Pending request and its items will be permanently deleted.</p>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><input type="hidden" name="rowVersion" value="@Convert.ToBase64String(Model.RowVersion)" />
+<div class="actions"><button class="button danger" type="submit">Delete request</button><a class="button secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a></div></form></section>
